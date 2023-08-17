@@ -1,7 +1,7 @@
 // 1280 < 1919
 @media (max-width: 1919px) {
 	body {
-		background-image: url('/mocks/img/sparks_1280.png');
+		background-image: url('@/assets/img/sparks_1280.png');
 		background-position-y: 379px;
 	}
 
@@ -155,7 +155,7 @@
 // 1024 < 1279
 @media (max-width: 1279px) {
 	body {
-		background-image: url('/mocks/img/sparks_1024.png');
+		background-image: url('@/assets/img/sparks_1024.png');
 		background-position-y: 302px;
 	}
 
@@ -310,7 +310,7 @@
 // 768 < 1023
 @media (max-width: 1023px) {
 	body {
-		background-image: url('/mocks/img/sparks_1024.png');
+		background-image: url('@/assets/img/sparks_1024.png');
 		background-position-y: 302px;
 		background-size: cover;
 	}
@@ -338,7 +338,7 @@
 // 480 < 767
 @media (max-width: 767px) {
 	body {
-		background-image: url('/mocks/img/sparks_480.png');
+		background-image: url('@/assets/img/sparks_480.png');
 		background-position-y: 140px;
 		background-size: contain;
 	}
