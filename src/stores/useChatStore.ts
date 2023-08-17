@@ -26,7 +26,7 @@ export const useChatStore = defineStore('chats', () => {
 
 	const getFilteredList = computed(() => {
 		let hook = changed.value;
-		return chatList.filter((chat) => chat.name.toLowerCase().includes(filter.value));
+		return chatList?.filter((chat) => chat.name.toLowerCase().includes(filter.value));
 	});
 
 	// watch(

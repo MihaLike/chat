@@ -12,7 +12,7 @@
 				</svg>
 			</button>
 			<article class="chat-user-card">
-				<img src="img/user1.png" alt="User Avatar" class="chat-user-card__photo" />
+				<img src="/img/user1.png" alt="User Avatar" class="chat-user-card__photo" />
 				<div class="chat-card-content">
 					<h3 class="chat-card-content__card-name">{{ user.name }}</h3>
 					<span class="chat-card-content__card-time">Был 7 часов назад</span>
@@ -29,9 +29,9 @@
 			<div
 				class="user-message-wrapper"
 				v-for="message of props.user.messages"
-				:key="message.time"
+				:key="message.id"
 				:class="{ 'user-message-wrapper_end': message.type === 'own', 'user-message-wrapper_start': message.type === 'user' }">
-				<img v-if="message.type === 'user'" src="img/user1.png" alt="User Avatar" class="user-message-photo" />
+				<img v-if="message.type === 'user'" src="/img/user1.png" alt="User Avatar" class="user-message-photo" />
 				<div :class="{ 'own-message': message.type === 'own', 'user-message': message.type === 'user' }">
 					<h3 v-if="message.type === 'user'" class="user-message__name">{{ props.user.name }}</h3>
 					<p class="own-message__text">
@@ -180,13 +180,18 @@
 	import { useSendMessage } from '@/composables/useFetchChats';
 	import { ref, onUpdated } from 'vue';
 	import { formatDate } from '@/composables/useDate';
+	import type { PropType } from 'vue';
+	import type { User } from '@/types/Chats';
 
 	const props = defineProps({
 		chatStatus: {
 			type: Boolean,
 			required: true,
 		},
-		user: {},
+		user: {
+			type: Object as PropType<User> | undefined,
+			required: true,
+		},
 	});
 
 	const emits = defineEmits(['close', 'updateLastMessage']);
@@ -198,7 +203,7 @@
 	// let lastIndex = props.user.messages ? props.user.messages[props.user.messages.length - 1] : null;
 	// const showDate = ref(!lastIndex ? false : props.user.messages[lastIndex].date.getDay() === today.getDay());
 	const textMessage = ref('');
-	const bottom = ref(null);
+	const bottom = ref();
 
 	const sendMessage = () => {
 		// no empty messages
@@ -206,7 +211,8 @@
 			return;
 		}
 		useSendMessage(props.user.id, {
-			date: Date.now(),
+			id: Date.now(),
+			date: new Date().toString(),
 			text: textMessage.value,
 			type: 'own',
 		});

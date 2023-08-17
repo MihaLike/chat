@@ -1,4 +1,5 @@
 type Messages = {
+	id: number;
 	date: string;
 	text: string;
 	type: 'user' | 'own';
@@ -10,4 +11,6 @@ interface User {
 	messages: Array<Messages>;
 }
 
-export interface Chats extends Array<User> {}
+interface Chats extends Array<User> {}
+
+export type { User, Messages, Chats };

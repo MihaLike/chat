@@ -15,7 +15,7 @@
 								v-for="(chat, index) of chatStore.getFilteredList"
 								:key="chat.id"
 								class="user-list__item"
-								:class="{ 'user-list_active': index === activeList }">
+								:class="{ 'user-list_active': chat.id === activeList }">
 								<article class="user-list__card">
 									<img src="/img/user1.png" alt="User Avatar" class="user-list__card_photo" />
 									<div class="user-list__card-content">
@@ -50,19 +50,21 @@
 	// import LastMessage from './LastMessage.vue';
 	import { ref, reactive, computed, watch } from 'vue';
 	import { formatDate } from '@/composables/useDate';
+	import type { User, Messages } from '@/types/Chats';
 
 	// Store
 	const chatStore = useChatStore();
 	chatStore.loadChatList();
-	const chats = reactive(chatStore.getUserList);
+	const chats = chatStore.getUserList;
 
 	// State
 	const status = ref(false);
-	let currentChat = ref({});
+	const currentChat = ref({} as User);
 	const changed = ref(0);
 	const search = ref('');
+	const activeList = ref(-1);
 
-	const filterByName = () => {
+	const filterByName = (): void => {
 		chatStore.changed++;
 		if (search.value.length < 1) {
 			chatStore.filter = '';
@@ -71,46 +73,59 @@
 		}
 	};
 
-	// close chat xs
+	// Close chat xs
 	const close = () => {
 		status.value = false;
 	};
 
-	// Last message
+	// Last messages
+	type LastMessage = {
+		id: number;
+		chat: Messages | null;
+	};
 	const lastMessages = computed(() => {
 		let hook = changed.value;
-		let acc = [];
-		chats.map((chat) => {
-			let o = { id: chat.id, chat: chat.messages ? chat.messages[chat.messages.length - 1] : null };
-			acc.push(o);
+		let acc: Array<LastMessage> = [];
+		chats?.map((chat: User) => {
+			acc.push({
+				id: chat.id,
+				chat: chat.messages ? chat.messages[chat.messages.length - 1] : null,
+			});
 		});
 		return acc;
 	});
 
 	const renderLastMessage = (id: number) => {
+		const result = ensure(lastMessages.value.find((message) => message.id == id));
+		const date = result.chat?.date;
+		let createDate: string = '';
+		if (date !== undefined) {
+			createDate = formatDate(new Date(date));
+		}
+
 		return {
-			text: lastMessages.value.find((message) => message.id == id).chat?.text,
-			date: formatDate(new Date(lastMessages.value.find((message) => message.id == id).chat?.date)),
+			text: result.chat?.text,
+			date: createDate,
 		};
 	};
 
-	const activeList = ref(-1);
-
+	// Open chosen chat on click
 	const openChat = (id: number) => {
 		status.value = true;
 		activeList.value = id;
-		currentChat.value = chats.find((chat) => chat.id === id);
+		const result = chats?.find((chat) => chat.id === id) !== undefined;
+		if (result !== undefined) {
+			currentChat.value = ensure(chats?.find((chat) => chat.id === id));
+		} else {
+			return;
+		}
 	};
 
-	// watch(
-	// 	() => currentChat,
-	// 	(n, o) => {
-	// console.log('watcher triggereed', n, o);
-	// chats.reduce((acc, chat) => {
-	// 	let { id, messages } = chat;
-	// 	return { ...acc, [id]: messages.length > 0 ? chat.messages[messages.length - 1] : null };
-	// }, {});
-	// 	},
-	// 	{ deep: true }
-	// );
+	// Checking that .find return value
+	function ensure<T>(argument: T | undefined | null, message: string = 'This value was promised to be there.'): T {
+		if (argument === undefined || argument === null) {
+			throw new TypeError(message);
+		}
+		return argument;
+	}
 </script>
