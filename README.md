@@ -6,7 +6,8 @@ npm install
 npm run dev - development
 npm run build - production
 
-
+Look project live on gh-pages:
+happyhidra.github.io/chat/
 
 
 
