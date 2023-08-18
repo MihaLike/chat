@@ -8,6 +8,8 @@
 	.container {
 		padding: 0 143px;
 		padding-top: 107px;
+		padding-left: 138px;
+		padding-right: 127px;
 	}
 
 	.content {
@@ -358,6 +360,7 @@
 
 	.back-btn_small {
 		display: block;
+		padding: 0;
 	}
 
 	.search {
@@ -445,11 +448,11 @@
 	.chat {
 		// display: none;
 		.chat__filled-wrapper {
-			padding-top: 117px;
+			padding-top: 98px;
 			.chat__header {
 				padding: 26px;
 				padding-top: 23px;
-				padding-left: 62px;
+				padding-left: 26px;
 				padding-bottom: 16px;
 				.chat-user-card {
 					&__photo {
