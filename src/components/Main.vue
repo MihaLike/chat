@@ -3,8 +3,8 @@
 		<main>
 			<div class="content">
 				<!-- Users -->
-				<section class="search">
-					<div class="wrapper search__wrapper" :class="{ 'chat__filled-wrapper_small': status }">
+				<section class="search" :class="{ 'chat__filled-wrapper_small': status }">
+					<div class="wrapper search__wrapper">
 						<div class="search-input">
 							<input @input="filterByName" type="text" placeholder=" Поиск ..." v-model="search" />
 							<button class="button btn search-btn">F</button>

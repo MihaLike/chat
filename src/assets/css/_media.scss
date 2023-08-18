@@ -8,7 +8,7 @@
 	.container {
 		padding: 0 143px;
 		padding-top: 107px;
-		padding-left: 138px;
+		padding-left: 144px;
 		padding-right: 127px;
 	}
 
@@ -360,6 +360,7 @@
 
 	.back-btn_small {
 		display: block;
+		margin-right: 24px;
 		padding: 0;
 	}
 
@@ -448,13 +449,14 @@
 	.chat {
 		// display: none;
 		.chat__filled-wrapper {
-			padding-top: 98px;
+			padding-top: 117px;
 			.chat__header {
 				padding: 26px;
 				padding-top: 23px;
 				padding-left: 26px;
 				padding-bottom: 16px;
 				.chat-user-card {
+					margin-right: auto;
 					&__photo {
 						margin-right: 10px;
 						width: 49px;
