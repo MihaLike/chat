@@ -200,8 +200,6 @@
 	};
 
 	// const today = Date();
-	// let lastIndex = props.user.messages ? props.user.messages[props.user.messages.length - 1] : null;
-	// const showDate = ref(!lastIndex ? false : props.user.messages[lastIndex].date.getDay() === today.getDay());
 	const textMessage = ref('');
 	const bottom = ref();
 
@@ -216,8 +214,13 @@
 			text: textMessage.value,
 			type: 'own',
 		});
+		emits('updateLastMessage', props.user.id, {
+			id: Date.now(),
+			date: new Date().toString(),
+			text: textMessage.value,
+			type: 'own',
+		});
 		textMessage.value = '';
-		emits('updateLastMessage');
 	};
 
 	onUpdated(() => {

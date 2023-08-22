@@ -13,4 +13,9 @@ interface User {
 
 interface Chats extends Array<User> {}
 
-export type { User, Messages, Chats };
+type LastMessage = {
+	id: number;
+	chat: Messages | null;
+};
+
+export type { User, Messages, Chats, LastMessage };

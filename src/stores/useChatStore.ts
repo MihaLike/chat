@@ -1,45 +1,32 @@
 import { defineStore } from 'pinia';
 import { ref, computed, watch } from 'vue';
 import { useFetchChats } from '@/composables/useFetchChats';
-import type { Chats } from '@/types/Chats';
-// ref()s become state properties
-// computed()s become getters
-// function()s become actions
+import type { Chats, User, LastMessage } from '@/types/Chats';
 
 export const useChatStore = defineStore('chats', () => {
-	let chatList: Chats | null = null;
-
+	const chatList = ref(null as Chats | null);
 	const filter = ref('');
-	const changed = ref(0);
+
+	const lastMessages = ref([] as Array<LastMessage>);
 
 	const getUserList = computed(() => {
 		return chatList;
 	});
 
 	const loadChatList = () => {
-		chatList = useFetchChats();
+		chatList.value = useFetchChats();
+
+		chatList.value?.map((chat: User) => {
+			lastMessages.value.push({
+				id: chat.id,
+				chat: chat.messages ? chat.messages[chat.messages.length - 1] : null,
+			});
+		});
 	};
 
-	// const loadFilteredList = (filter: string) => {
-	// 	return chatList.filter((chat) => chat.name.includes(filter));
-	// };
-
 	const getFilteredList = computed(() => {
-		let hook = changed.value;
-		return chatList?.filter((chat) => chat.name.toLowerCase().includes(filter.value));
+		return chatList.value?.filter((chat) => chat.name.toLowerCase().includes(filter.value));
 	});
 
-	// watch(
-	// 	() => getFilteredList,
-	// 	(n, o) => {
-	// 		console.log('watcher triggereed', n, o);
-	// 		// chats.reduce((acc, chat) => {
-	// 		// 	let { id, messages } = chat;
-	// 		// 	return { ...acc, [id]: messages.length > 0 ? chat.messages[messages.length - 1] : null };
-	// 		// }, {});
-	// 	},
-	// 	{ deep: true }
-	// );
-
-	return { chatList, getUserList, loadChatList, getFilteredList, filter, changed };
+	return { chatList, getUserList, loadChatList, getFilteredList, filter, lastMessages };
 });
