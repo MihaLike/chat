@@ -12,7 +12,7 @@
 				</svg>
 			</button>
 			<article class="chat-user-card">
-				<img src="/img/user1.png" alt="User Avatar" class="chat-user-card__photo" />
+				<img :src="user.avatar" alt="User Avatar" class="chat-user-card__photo" />
 				<div class="chat-card-content">
 					<h3 class="chat-card-content__card-name">{{ user.name }}</h3>
 					<span class="chat-card-content__card-time">Был 7 часов назад</span>
@@ -31,7 +31,7 @@
 				v-for="message of props.user.messages"
 				:key="message.id"
 				:class="{ 'user-message-wrapper_end': message.type === 'own', 'user-message-wrapper_start': message.type === 'user' }">
-				<img v-if="message.type === 'user'" src="/img/user1.png" alt="User Avatar" class="user-message-photo" />
+				<img v-if="message.type === 'user'" :src="user.avatar" alt="User Avatar" class="user-message-photo" />
 				<div :class="{ 'own-message': message.type === 'own', 'user-message': message.type === 'user' }">
 					<h3 v-if="message.type === 'user'" class="user-message__name">{{ props.user.name }}</h3>
 					<p class="own-message__text">

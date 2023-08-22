@@ -17,7 +17,7 @@
 								class="user-list__item"
 								:class="{ 'user-list_active': chat.id === activeList }">
 								<article class="user-list__card">
-									<img src="/img/user1.png" alt="User Avatar" class="user-list__card_photo" />
+									<img :src="chat.avatar" alt="User Avatar" class="user-list__card_photo" />
 									<div class="user-list__card-content">
 										<h3 class="user-list__card-name">{{ chat.name }}</h3>
 										<p class="user-list__card-chat">

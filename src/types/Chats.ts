@@ -8,6 +8,7 @@ type Messages = {
 interface User {
 	id: number;
 	name: string;
+	avatar: string;
 	messages: Array<Messages>;
 }
 
