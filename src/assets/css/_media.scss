@@ -45,9 +45,10 @@
 	}
 
 	.user-list {
-		&__card_photo {
+		&__card-photo {
 			width: 65px;
 			height: 65px;
+			margin-right: 15px;
 		}
 		&__card-name {
 			font-size: 14px;
@@ -56,13 +57,15 @@
 			font-size: 12px;
 			line-height: 20px; /* 171.429% */
 		}
+		&__card-time {
+			right: -15px;
+			top: -5px;
+			font-size: 10px;
+		}
 		&__item {
 			padding: 20px;
 			padding-bottom: 14px;
 			max-height: 103px;
-		}
-		&__card_photo {
-			margin-right: 15px;
 		}
 	}
 
@@ -192,9 +195,10 @@
 	}
 
 	.user-list {
-		&__card_photo {
+		&__card-photo {
 			width: 55px;
 			height: 55px;
+			margin-right: 15px;
 		}
 		&__card-time {
 			right: -4px;
@@ -214,9 +218,6 @@
 			padding-top: 13px;
 			padding-bottom: 10px;
 			max-height: 93px;
-		}
-		&__card_photo {
-			margin-right: 15px;
 		}
 	}
 
@@ -407,9 +408,10 @@
 	}
 
 	.user-list {
-		&__card_photo {
+		&__card-photo {
 			width: 55px;
 			height: 55px;
+			margin-right: 15px;
 		}
 		&__card-time {
 			right: -4px;
@@ -429,9 +431,6 @@
 			padding-top: 11px;
 			padding-bottom: 11px;
 			max-height: 87px;
-		}
-		&__card_photo {
-			margin-right: 15px;
 		}
 	}
 

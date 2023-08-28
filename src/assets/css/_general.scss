@@ -68,11 +68,11 @@ ul {
 
 .user-list {
 	margin-right: 4px;
+	// padding: 0 5px;
 	cursor: pointer;
 	user-select: none;
 	overflow-y: auto;
-
-	scrollbar-color: $primary-light;
+	scrollbar-color: $user-list_borders;
 	scrollbar-width: 3px;
 
 	&::-webkit-scrollbar {
@@ -85,15 +85,17 @@ ul {
 	}
 
 	&__item {
+		position: relative;
 		padding: 20px 30px;
 		padding-right: 0;
 		max-height: 116px;
+		// border-radius: 15px;
 	}
 	&__card {
-		position: relative;
 		display: flex;
+		pointer-events: none;
 	}
-	&__card_photo {
+	&__card-photo {
 		border-radius: 15px;
 		margin-right: 20px;
 		background-repeat: no-repeat;
@@ -108,10 +110,10 @@ ul {
 	&__card-content::after {
 		content: '';
 		position: absolute;
-		bottom: -20px;
 		left: 0;
-		width: 100%;
-		outline: 1px solid $primary-light;
+		bottom: -14px;
+		right: -25px;
+		outline: 1px solid $user-list_borders;
 	}
 	&__card-name {
 		margin: 0;
@@ -149,13 +151,13 @@ ul {
 	}
 
 	&_active {
-		// opacity: 0.2;
+		pointer-events: none;
 		background: $active-list;
 	}
 
 	:hover {
-		transition: background-color 0.2s linear;
-		background: $active-list;
+		transition: background-color 0.2s ease-in-out;
+		background: $user-list_hover;
 	}
 }
 
@@ -172,7 +174,7 @@ ul {
 		width: 40px;
 		border: none;
 		border-radius: 15px;
-		background: rgba(255, 255, 255, 0.08);
+		background: rgb(60 55 64);
 		box-shadow: 2px 0px 10px 0px rgba(6, 3, 9, 0.05), 30px 25px 48px 8px rgba(6, 3, 9, 0.1);
 		backdrop-filter: blur(5px);
 		color: $primary-button;
@@ -190,7 +192,7 @@ ul {
 		font-size: 13px;
 		font-weight: 500;
 		line-height: normal;
-		border-bottom: 1px solid $primary-light;
+		border-bottom: 1px solid $user-list_borders;
 		user-select: none;
 		input {
 			width: 100%;
@@ -270,7 +272,7 @@ ul {
 			justify-content: space-between;
 			align-items: center;
 			padding: 30px;
-			border-bottom: 1px solid $primary-light;
+			border-bottom: 1px solid $user-list_borders;
 			.chat-user-card {
 				display: flex;
 				&__photo {
@@ -306,7 +308,7 @@ ul {
 		height: 858px;
 		padding: 20px 30px 33px 30px;
 		overflow-y: auto;
-		scrollbar-color: $primary-light;
+		scrollbar-color: $user-list_borders;
 		scrollbar-width: 3px;
 
 		&::-webkit-scrollbar {
@@ -469,7 +471,7 @@ ul {
 	position: relative;
 	user-select: none;
 	padding: 30px;
-	border-top: 1px solid #7d7781;
+	border-top: 1px solid #2c2631;
 	input {
 		width: 100%;
 		outline: 0;
