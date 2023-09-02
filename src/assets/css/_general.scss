@@ -5,6 +5,7 @@ body {
 	background-repeat: no-repeat;
 	font-family: 'Montserrat';
 	font-style: normal;
+	user-select: none;
 }
 
 img {
@@ -14,8 +15,8 @@ img {
 }
 
 .container {
-	padding: 0 130px;
-	padding-top: 127px;
+	padding: 127px 130px;
+	// padding-top: 127px;
 }
 
 .content {
