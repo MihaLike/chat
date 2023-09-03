@@ -26,9 +26,7 @@
 		<!-- Chat Box  -->
 		<div class="chat-box">
 			<!-- <span class="chat-box__date" :class="{ shown: showDate }">Сегодня</span> -->
-			<TransitionGroup
-				name="list"
-				tag="div"
+			<div
 				class="user-message-wrapper"
 				v-for="message of props.user.messages"
 				:key="message.id"
@@ -42,7 +40,7 @@
 					<br />
 					<span class="own-message__time">{{ formatDate(new Date(message.date)) }}</span>
 				</div>
-			</TransitionGroup>
+			</div>
 			<div ref="bottom"></div>
 		</div>
 		<div class="chat-input">
@@ -229,6 +227,7 @@
 		});
 		textMessage.value = '';
 		chatinput.value?.focus();
+
 		chatStore.sortChatList();
 	};
 
@@ -236,23 +235,3 @@
 		bottom.value?.scrollIntoView({ behavior: 'smooth' });
 	});
 </script>
-
-<style scoped>
-	.list-move, /* apply transition to moving elements */
-.list-enter-active,
-.list-leave-active {
-		transition: all 0.3s ease-in-out;
-	}
-
-	.list-enter-from,
-	.list-leave-to {
-		opacity: 0.1;
-		transform: translateX(300px);
-	}
-
-	/* ensure leaving items are taken out of layout flow so that moving
-   animations can be calculated correctly. */
-	.list-leave-active {
-		position: absolute;
-	}
-</style>

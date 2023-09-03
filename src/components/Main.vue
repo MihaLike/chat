@@ -11,7 +11,7 @@
 						</div>
 
 						<div v-if="chatsLoading" class="loader"><img src="../assets/loader.gif" alt="Loader" class="loader" /></div>
-						<TransitionGroup name="list" tag="ul" class="user-list" v-if="chatsNotEmpty & !chatsLoading">
+						<TransitionGroup name="list" tag="ul" class="user-list" v-if="chatsNotEmpty && !chatsLoading">
 							<!-- <ul class="user-list" v-if="chatsNotEmpty & !chatsLoading"> -->
 							<div ref="top" :key="1"></div>
 							<li
@@ -33,7 +33,7 @@
 							</li>
 							<!-- </ul> -->
 						</TransitionGroup>
-						<div v-if="!chatsNotEmpty & !chatsLoading" class="search__card">
+						<div v-if="!chatsNotEmpty && !chatsLoading" class="search__card">
 							<h2 class="search__title">Тут пусто</h2>
 							<p class="search__descr">Вы ещё никому не писали</p>
 						</div>
