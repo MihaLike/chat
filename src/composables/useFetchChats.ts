@@ -2,7 +2,7 @@
 import { chats } from '@/data/index';
 import type { Chats, Messages } from '@/types/Chats';
 
-export async function useFetchChats(): Chats {
+export async function useFetchChats(): Promise<Chats> {
 	// Some async get data here
 	return new Promise((res, rej) =>
 		setTimeout(() => {
