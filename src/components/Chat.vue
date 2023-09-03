@@ -26,7 +26,9 @@
 		<!-- Chat Box  -->
 		<div class="chat-box">
 			<!-- <span class="chat-box__date" :class="{ shown: showDate }">Сегодня</span> -->
-			<div
+			<TransitionGroup
+				name="list"
+				tag="div"
 				class="user-message-wrapper"
 				v-for="message of props.user.messages"
 				:key="message.id"
@@ -40,11 +42,11 @@
 					<br />
 					<span class="own-message__time">{{ formatDate(new Date(message.date)) }}</span>
 				</div>
-			</div>
+			</TransitionGroup>
 			<div ref="bottom"></div>
 		</div>
 		<div class="chat-input">
-			<input @keyup.enter="sendMessage" type="text" placeholder="Напишите сообщение ..." v-model="textMessage" />
+			<input @keyup.enter="sendMessage" type="text" placeholder="Напишите сообщение ..." v-model="textMessage" ref="chatinput" />
 			<button @click="sendMessage" class="button btn send-btn">
 				<svg width="8" height="15" viewBox="0 0 8 15" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path
@@ -182,6 +184,7 @@
 	import { formatDate } from '@/composables/useDate';
 	import type { PropType } from 'vue';
 	import type { User } from '@/types/Chats';
+	import { useChatStore } from '@/stores/useChatStore';
 
 	const props = defineProps({
 		chatStatus: {
@@ -199,9 +202,13 @@
 		emits('close');
 	};
 
+	// Store
+	const chatStore = useChatStore();
+
 	// const today = Date();
 	const textMessage = ref('');
 	const bottom = ref();
+	const chatinput = ref();
 
 	const sendMessage = () => {
 		// no empty messages
@@ -221,9 +228,31 @@
 			type: 'own',
 		});
 		textMessage.value = '';
+		chatinput.value?.focus();
+		chatStore.sortChatList();
 	};
 
 	onUpdated(() => {
 		bottom.value?.scrollIntoView({ behavior: 'smooth' });
 	});
 </script>
+
+<style scoped>
+	.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+		transition: all 0.3s ease-in-out;
+	}
+
+	.list-enter-from,
+	.list-leave-to {
+		opacity: 0.1;
+		transform: translateX(300px);
+	}
+
+	/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+	.list-leave-active {
+		position: absolute;
+	}
+</style>

@@ -9,7 +9,11 @@
 							<input @input="filterByName" type="text" placeholder=" Поиск ..." v-model="search" />
 							<button class="button btn search-btn">F</button>
 						</div>
-						<ul class="user-list" v-if="chatsNotEmpty">
+
+						<div v-if="chatsLoading" class="loader"><img src="../assets/loader.gif" alt="Loader" class="loader" /></div>
+						<TransitionGroup name="list" tag="ul" class="user-list" v-if="chatsNotEmpty & !chatsLoading">
+							<!-- <ul class="user-list" v-if="chatsNotEmpty & !chatsLoading"> -->
+							<div ref="top" :key="1"></div>
 							<li
 								@click="openChat(chat.id)"
 								v-for="chat of chatStore.getFilteredList"
@@ -27,8 +31,9 @@
 									</div>
 								</article>
 							</li>
-						</ul>
-						<div v-else class="search__card">
+							<!-- </ul> -->
+						</TransitionGroup>
+						<div v-if="!chatsNotEmpty & !chatsLoading" class="search__card">
 							<h2 class="search__title">Тут пусто</h2>
 							<p class="search__descr">Вы ещё никому не писали</p>
 						</div>
@@ -50,16 +55,16 @@
 	import { formatDate } from '@/composables/useDate';
 	import type { User, Messages } from '@/types/Chats';
 
-	// Store
-	const chatStore = useChatStore();
-	chatStore.loadChatList();
-	const chats = chatStore.getUserList;
-
 	// State
+	const chatsLoading = ref(true);
 	const status = ref(false);
 	const currentChat = ref({} as User);
 	const search = ref('');
 	const activeList = ref(-1);
+	const top = ref();
+	// Store
+	const chatStore = useChatStore();
+	const chats = chatStore.getUserList;
 
 	const chatsNotEmpty = computed(() => {
 		return chatStore.chatList?.length;
@@ -90,6 +95,7 @@
 	const updateLastMessage = (id: number, message: Messages) => {
 		const chatId = ensure(chatStore.lastMessages?.find((message) => message.id == id));
 		chatId.chat = message;
+		top.value?.scrollIntoView({ behavior: 'smooth' });
 	};
 
 	// Close chat xs
@@ -116,4 +122,37 @@
 		}
 		return argument;
 	}
+
+	// Initial Loading
+	chatStore
+		.loadChatList()
+		.then(() => {
+			chatStore.sortChatList();
+		})
+		.catch((er) => {
+			console.log('Error:', er);
+		})
+		.finally(() => {
+			chatsLoading.value = false;
+		});
 </script>
+
+<style scoped>
+	.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+		transition: all 0.3s ease-in-out;
+	}
+
+	.list-enter-from,
+	.list-leave-to {
+		opacity: 0.1;
+		transform: translateX(300px);
+	}
+
+	/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+	.list-leave-active {
+		position: absolute;
+	}
+</style>

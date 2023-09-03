@@ -55,6 +55,13 @@ img {
 	}
 }
 
+.loader {
+	display: flex;
+	justify-content: center;
+	border-radius: 18px;
+	max-height: 480px;
+}
+
 .back-btn_small {
 	display: none;
 	background: none;
@@ -73,6 +80,7 @@ ul {
 	cursor: pointer;
 	user-select: none;
 	overflow-y: auto;
+	overflow-x: hidden;
 	scrollbar-color: $user-list_borders;
 	scrollbar-width: 3px;
 

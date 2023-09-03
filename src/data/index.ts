@@ -20,14 +20,14 @@ export const chats: Chats = [
 			},
 			{
 				id: 1692308435070,
-				date: 'Thu Aug 17 2023 12:42:50 GMT+0300 (Москва, стандартное время)',
+				date: 'Thu Aug 17 2023 12:46:50 GMT+0300 (Москва, стандартное время)',
 				text: 'Hey from user1 x2',
 				type: 'user',
 			},
 
 			{
 				id: 1692308435071,
-				date: 'Thu Aug 17 2023 14:02:50 GMT+0300 (Москва, стандартное время)',
+				date: 'Thu Aug 17 2023 14:32:50 GMT+0300 (Москва, стандартное время)',
 				text: 'Hey user1 x2',
 				type: 'own',
 			},
@@ -58,13 +58,13 @@ export const chats: Chats = [
 			},
 			{
 				id: 1692308435075,
-				date: 'Thu Aug 17 2023 14:42:50 GMT+0300 (Москва, стандартное время)',
+				date: 'Thu Aug 17 2023 14:49:50 GMT+0300 (Москва, стандартное время)',
 				text: 'Hey user2 x2',
 				type: 'own',
 			},
 			{
 				id: 1692308435076,
-				date: 'Thu Aug 17 2023 14:42:50 GMT+0300 (Москва, стандартное время)',
+				date: 'Thu Aug 17 2023 17:58:50 GMT+0300 (Москва, стандартное время)',
 				text: 'Hey from user2 x3',
 				type: 'user',
 			},
@@ -107,7 +107,7 @@ export const chats: Chats = [
 			},
 			{
 				id: 1692308435080,
-				date: 'Thu Aug 17 2023 14:42:50 GMT+0300 (Москва, стандартное время)',
+				date: 'Thu Aug 17 2023 13:42:50 GMT+0300 (Москва, стандартное время)',
 				text: 'Hey user5 x2',
 				type: 'own',
 			},
@@ -144,7 +144,7 @@ export const chats: Chats = [
 			},
 			{
 				id: 1692308435085,
-				date: 'Thu Aug 17 2023 14:42:50 GMT+0300 (Москва, стандартное время)',
+				date: 'Thu Aug 17 2023 14:38:50 GMT+0300 (Москва, стандартное время)',
 				text: 'Hey user6 x2',
 				type: 'own',
 			},
