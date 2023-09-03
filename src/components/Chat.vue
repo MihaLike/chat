@@ -227,7 +227,7 @@
 		});
 		textMessage.value = '';
 		chatinput.value?.focus();
-
+		bottom.value?.scrollIntoView({ behavior: 'smooth' });
 		chatStore.sortChatList();
 	};
 
