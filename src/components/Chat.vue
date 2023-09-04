@@ -177,7 +177,7 @@
 </template>
 
 <script setup lang="ts">
-	import { useSendMessage } from '@/composables/useFetchChats';
+	import { useSendMessage } from '@/composables/useSendMessage';
 	import { ref, onUpdated } from 'vue';
 	import { formatDate } from '@/composables/useDate';
 	import type { PropType } from 'vue';
@@ -231,6 +231,7 @@
 		chatStore.sortChatList();
 	};
 
+	// Scroll to last message
 	onUpdated(() => {
 		bottom.value?.scrollIntoView({ behavior: 'smooth' });
 	});

@@ -13,7 +13,7 @@
 						<div v-if="chatsLoading" class="loader"><img src="../assets/loader.gif" alt="Loader" class="loader" /></div>
 						<TransitionGroup name="list" tag="ul" class="user-list" v-if="chatsNotEmpty && !chatsLoading">
 							<!-- <ul class="user-list" v-if="chatsNotEmpty & !chatsLoading"> -->
-							<div ref="top" :key="1"></div>
+							<div ref="topOfUserList" :key="1"></div>
 							<li
 								@click="openChat(chat.id)"
 								v-for="chat of chatStore.getFilteredList"
@@ -61,7 +61,7 @@
 	const currentChat = ref({} as User);
 	const search = ref('');
 	const activeList = ref(-1);
-	const top = ref();
+	const topOfUserList = ref();
 	// Store
 	const chatStore = useChatStore();
 	const chats = chatStore.getUserList;
@@ -95,7 +95,7 @@
 	const updateLastMessage = (id: number, message: Messages) => {
 		const chatId = ensure(chatStore.lastMessages?.find((message) => message.id == id));
 		chatId.chat = message;
-		top.value?.scrollIntoView({ behavior: 'smooth' });
+		topOfUserList.value?.scrollIntoView({ behavior: 'smooth' });
 	};
 
 	// Close chat xs
