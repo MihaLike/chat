@@ -18,7 +18,8 @@
 	}
 
 	.wrapper {
-		height: 652px;
+		height: 75vh;
+		max-height: 652px;
 	}
 
 	.search__card {
@@ -352,8 +353,9 @@
 	.content {
 		grid-template-columns: 1fr;
 		.wrapper {
-			padding-top: 140px;
-			height: 692px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			height: 100vh;
 			border-radius: 0;
 		}
 	}
@@ -449,7 +451,7 @@
 	.chat {
 		// display: none;
 		.chat__filled-wrapper {
-			padding-top: 117px;
+			padding-top: 20px;
 			.chat__header {
 				padding: 26px;
 				padding-top: 23px;

@@ -31,7 +31,8 @@ img {
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	height: 1106px;
+	max-height: 1106px;
+	height: 75vh;
 	border-radius: 20px;
 	outline: 1px solid rgba(255, 255, 255, 0.07);
 	background: rgba(255, 255, 255, 0.03);
@@ -76,8 +77,8 @@ ul {
 }
 
 .user-list {
-	margin-right: 4px;
-	// padding: 0 5px;
+	padding-left: 3px;
+	margin-bottom: 8px;
 	cursor: pointer;
 	user-select: none;
 	overflow-y: auto;

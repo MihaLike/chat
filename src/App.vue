@@ -1,7 +1,7 @@
 <template>
-	<Main> </Main>
+	<TheMain />
 </template>
 
 <script setup lang="ts">
-	import Main from '@/components/Main.vue';
+	import TheMain from '@/components/TheMain.vue';
 </script>

@@ -6,6 +6,8 @@ import type { Chats, User, LastMessage } from '@/types/Chats';
 export const useChatStore = defineStore('chats', () => {
 	const chatList = ref(null as Chats | null);
 	const filter = ref('');
+	const chatStatus = ref(false);
+	const activeChat = ref(-1);
 
 	const lastMessages = ref([] as Array<LastMessage>);
 
@@ -50,5 +52,5 @@ export const useChatStore = defineStore('chats', () => {
 		return chatList.value?.filter((chat) => chat.name.toLowerCase().includes(filter.value));
 	});
 
-	return { chatList, getUserList, loadChatList, sortChatList, getFilteredList, filter, lastMessages };
+	return { chatList, getUserList, loadChatList, sortChatList, getFilteredList, filter, lastMessages, chatStatus, activeChat };
 });
