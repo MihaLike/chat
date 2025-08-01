@@ -5,16 +5,10 @@
       :is-chat-empty="isChatEmpty"
     />
  
-		<div
-			v-if="isChatsLoading"
-			class="loader"
-		>
-			<img
-				src="../../assets/loader.gif"
-				alt="Loader"
-				class="loader"
-			/>
-		</div>
+    <AppLoader
+      v-if="isChatsLoading"      
+      comment="Загрузка чатов..."
+    />
 
 		<TransitionGroup
 			name="list"
@@ -81,6 +75,7 @@
   import { Emits, Props } from './types';
   import FilterString from '../filter-string/FilterString.vue';
   import { storeToRefs } from 'pinia';
+import AppLoader from '../app-loader/AppLoader.vue';
 
   defineProps<Props>();
 	const emits = defineEmits<Emits>();
@@ -142,6 +137,9 @@
 </script>
 
 <style scoped>
+  .chats-list {
+    position: relative;
+  }
 	/* .list-move, */
 	.list-enter-active,
 	.list-leave-active {

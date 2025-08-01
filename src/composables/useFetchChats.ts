@@ -7,7 +7,7 @@ export async function useFetchChats(): Promise<User[]> {
 	return new Promise((res, rej) =>
 		setTimeout(() => {
 			res(chats);
-		}, 1000)
+		}, 1500)
 	);
 }
   

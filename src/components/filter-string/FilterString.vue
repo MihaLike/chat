@@ -6,7 +6,7 @@
 		>
 			<input
 				type="text"
-				placeholder=" Поиск по имени пользователя..."
+				placeholder="Поиск по имени..."
 				v-model="filterString"
 			/>
 
