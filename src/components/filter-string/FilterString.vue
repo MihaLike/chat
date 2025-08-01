@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-  import { Props } from './types';
+  import type { Props } from './types';
 
   defineProps<Props>();
   const filterString = defineModel<string>('filterString', { required: true, default: '' });

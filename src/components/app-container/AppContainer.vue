@@ -14,6 +14,7 @@
 
       <section>
         <MessagesList
+          v-if='currentChat'
           :user="currentChat"
           :is-chats-loading="isChatsLoading"
           @update-last-message="updateLastMessage"

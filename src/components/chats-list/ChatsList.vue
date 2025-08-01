@@ -72,7 +72,7 @@
 	import { formatDate } from '@/composables/useDate';
 	import { ensure } from '@/helpers/ensureArgument';
 	import { MOBILE_DEVICE } from '@/utils/utils';
-  import { Emits, Props } from './types';
+  import type { Emits, Props } from './types';
   import FilterString from '../filter-string/FilterString.vue';
   import { storeToRefs } from 'pinia';
 import AppLoader from '../app-loader/AppLoader.vue';

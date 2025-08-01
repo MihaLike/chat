@@ -1,7 +1,7 @@
 import type { Message, User } from '@types'
 
 export type Props = {
-  user: User | null
+  user: User
 }
 
 export type Emits = {
