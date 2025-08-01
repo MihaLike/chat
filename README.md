@@ -2,7 +2,7 @@ Vue3 + Typescript, state manager Pinia. (Composition API). /Vite/
 Chat simulator based on mock data.
 
 ## Check on gh-pages live: 
-https://happyhidra.github.io/chat/
+https://mihalike.github.io/chat/
 ## Setup
 npm install
 ## Development Server
