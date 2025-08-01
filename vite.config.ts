@@ -4,6 +4,12 @@ import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
+  build: {
+    target: 'es2018',
+    rollupOptions: {
+      treeshake: 'safest',
+    },
+  },
 	plugins: [
     vue(),
     dts({
