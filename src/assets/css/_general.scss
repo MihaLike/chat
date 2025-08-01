@@ -16,7 +16,7 @@ img {
 
  .app-container__content {
     display: grid;
-    min-width: 240px;
+    min-width: 300px;
     grid-template-columns: 674px 926px;
     grid-gap: 60px;
     justify-content: space-between;
@@ -249,7 +249,7 @@ ul {
 }
 
 // Chat
-.support-btn {
+.close-btn {
 	padding: 15px 20px;
 	max-height: 47px;
 	border-radius: 15px;

@@ -103,16 +103,15 @@
 			height: 57px;
 		}
 	}
-	.support-btn {
+	.close-btn {
 		padding: 14px 19px;
 		max-width: 201px;
 		font-size: 12px;
 	}
 
-	.support-btn_large {
-		display: block;
-	}
-	.support-btn_small {
+
+
+	.close-btn_small {
 		display: none;
 	}
 
@@ -217,6 +216,8 @@
 		}
 	}
 
+
+
 	.chat {
 		.chat-box {
 			padding: 20px;
@@ -259,15 +260,15 @@
 			}
 		}
 	}
-	.support-btn {
+	.close-btn {
 		padding: 12px 15px;
 		max-width: 105px;
 	}
 
-	.support-btn_large {
+	.close-btn_large {
 		display: none;
 	}
-	.support-btn_small {
+	.close-btn_small {
 		display: block;
 	}
 
@@ -332,6 +333,7 @@
 		font-size: 13px;
 		line-height: 22px;
 	}
+  
 }
 
 // 480 < 767
@@ -428,7 +430,7 @@
 		display: none;
 	}
 
-	.support-btn {
+	.close-btn {
 		padding: 15px 20px;
 		max-height: 45px;
 		max-width: 115px;

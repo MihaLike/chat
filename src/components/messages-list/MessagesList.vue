@@ -40,7 +40,7 @@
 
 			<button
 				@click="closeChat"
-				class="button support-btn"
+				class="button close-btn close-btn_large"
 			>
         X
       </button>
