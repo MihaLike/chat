@@ -12,7 +12,7 @@
 		padding-right: 139px;
 	}
 
-	.content {
+	.app-container__content {
 		grid-template-columns: 1fr 1fr;
 		grid-gap: 20px;
 	}
@@ -169,7 +169,7 @@
 		padding: 98px 143px;
 	}
 
-	.content {
+	.app-container__content {
 		grid-template-columns: 296px 422px;
 		grid-gap: 20px;
 	}
@@ -323,7 +323,7 @@
 		padding-top: 98px;
 	}
 
-	.content {
+	.app-container__content {
 		grid-template-columns: 1fr 1fr;
 	}
 
@@ -350,7 +350,7 @@
 		padding: 0;
 	}
 
-	.content {
+	.app-container__content {
 		grid-template-columns: 1fr;
 		.wrapper {
 			padding-top: 20px;

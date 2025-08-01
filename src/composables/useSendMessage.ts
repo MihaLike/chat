@@ -1,8 +1,9 @@
 import { chats } from '@/data';
-import type { Messages } from '@/types/Chats';
+import type { Message } from '@/types/shared';
 
-export async function useSendMessage(id: number, message: Messages) {
+export async function useSendMessage(id: string, message: Message) {
 	const index = chats.findIndex((chat) => chat.id === id);
-	// Some post data here
-	chats[index].messages.push(message);
+
+  chats[index].messages.push(message);
 }
+ 

@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="chatStore.chatStatus"
-		class="wrapper chat__filled-wrapper"
+		class="chat wrapper chat__filled-wrapper"
 		:class="{ 'chat__filled-wrapper_small': !chatStore.chatStatus }"
 	>
 		<!-- Chat Header -->
@@ -25,6 +25,7 @@
 					/>
 				</svg>
 			</button>
+
 			<article class="chat-user-card">
 				<img
 					:src="user.avatar"
@@ -36,11 +37,15 @@
 					<span class="chat-card-content__card-time">Был 7 часов назад</span>
 				</div>
 			</article>
-			<button class="button btn support-btn">
-				<span class="support-btn_large">Связаться с поддержкой</span>
-				<span class="support-btn_small">Поддержка</span>
-			</button>
+
+			<button
+				@click="closeChat"
+				class="button support-btn"
+			>
+        X
+      </button>
 		</div>
+
 		<!-- Chat Box  -->
 		<div class="chat-box">
 			<!-- <span class="chat-box__date" :class="{ shown: showDate }">Сегодня</span> -->
@@ -72,6 +77,7 @@
 			</div>
 			<div ref="bottom"></div>
 		</div>
+
 		<div class="chat-input">
 			<input
 				@keyup.enter="sendMessage"
@@ -99,6 +105,7 @@
 			</button>
 		</div>
 	</div>
+  
 	<div
 		v-else
 		class="wrapper chat__empty-wrapper"
@@ -294,30 +301,23 @@
 </template>
 
 <script setup lang="ts">
-	import { ref, onUpdated, nextTick, watch, reactive } from 'vue';
-	import type { PropType } from 'vue';
-	import type { User } from '@/types/Chats';
+	import { ref, onUpdated, nextTick, watch } from 'vue';
 	import { useSendMessage } from '@/composables/useSendMessage';
 	import { formatDate } from '@/composables/useDate';
 	import { useChatStore } from '@/stores/useChatStore';
 	import { useGlobalStore } from '@/stores/useGlobalStore';
 	import { MOBILE_DEVICE } from '@/utils/utils';
+  import type { Emits, Props } from './types';
+ 
+	const props = defineProps<Props>();
 
-	const props = defineProps({
-		user: {
-			type: Object as PropType<User> | undefined,
-			required: true,
-		},
-	});
-
-	const emits = defineEmits(['updateLastMessage']);
-
+	const emit = defineEmits<Emits>();
+ 
 	// Store
 	const chatStore = useChatStore();
 	// Global Store
 	const globalStore = useGlobalStore();
 
-	// const today = Date();
 	const textMessage = ref('');
 	const bottom = ref();
 	const chatinput = ref();
@@ -329,17 +329,18 @@
 			return;
 		}
 		useSendMessage(props.user.id, {
-			id: Date.now(),
+			id: Date.now().toString(),
 			date: new Date().toString(),
 			text: textMessage.value,
 			type: 'own',
 		});
-		emits('updateLastMessage', props.user.id, {
-			id: Date.now(),
+    
+		emit('updateLastMessage', props.user.id, {
+			id: Date.now().toString(),
 			date: new Date().toString(),
 			text: textMessage.value,
 			type: 'own',
-		});
+		}); 
 		textMessage.value = '';
 		await nextTick().then(() => {
 			// MOBILE BROWSERS
@@ -354,7 +355,7 @@
 	// Close chat XS
 	const closeChat = () => {
 		chatStore.chatStatus = false;
-		chatStore.activeChat = -1;
+		chatStore.activeChat = null;
 	};
 	// Watch on chat changed
 	watch(

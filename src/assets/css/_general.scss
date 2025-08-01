@@ -14,19 +14,15 @@ img {
 	user-select: none;
 }
 
-.container {
-	padding: 127px 130px;
-	// padding-top: 127px;
-}
-
-.content {
-	display: grid;
-	grid-template-columns: 674px 926px;
-	grid-gap: 60px;
-	justify-content: space-between;
-	backdrop-filter: blur(5px);
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
+ .app-container__content {
+    display: grid;
+    min-width: 240px;
+    grid-template-columns: 674px 926px;
+    grid-gap: 60px;
+    justify-content: space-between;
+    backdrop-filter: blur(5px);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
 
 .wrapper {
 	display: flex;

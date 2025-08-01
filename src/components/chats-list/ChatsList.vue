@@ -1,38 +1,32 @@
 <template>
-	<div class="wrapper search__wrapper">
+	<div class="chats-list wrapper">
+		<FilterString
+      v-model:filter-string='filterString'
+      :is-chat-empty="isChatEmpty"
+    />
+ 
 		<div
-			class="search-input"
-			:class="{ 'search-input_empty-large': !chatsNotEmpty }"
-		>
-			<input
-				@input="filterByName"
-				type="text"
-				placeholder=" Поиск ..."
-				v-model="search"
-			/>
-			<button class="button btn search-btn">F</button>
-		</div>
-
-		<div
-			v-if="props.chatsLoading"
+			v-if="isChatsLoading"
 			class="loader"
 		>
 			<img
-				src="../assets/loader.gif"
+				src="../../assets/loader.gif"
 				alt="Loader"
 				class="loader"
 			/>
 		</div>
+
 		<TransitionGroup
 			name="list"
 			tag="ul"
 			class="user-list"
-			v-if="chatsNotEmpty && !props.chatsLoading"
+			v-else-if="isChatEmpty && !isChatsLoading"
 		>
-			<div
+			<div 
 				ref="topOfUserList"
 				:key="11"
-			></div>
+			/>
+
 			<li
 				@click="openChat(chat.id)"
 				v-for="chat of chatStore.getFilteredList"
@@ -47,67 +41,71 @@
 						class="user-list__card-photo"
 					/>
 					<div class="user-list__card-content">
-						<h3 class="user-list__card-name">{{ chat.name }}</h3>
+						<h3 class="user-list__card-name">
+              {{ chat.name }}
+            </h3>
+
 						<p class="user-list__card-chat">
 							{{ renderLastMessage(chat.id).text }}
 						</p>
-						<span class="user-list__card-time">{{ renderLastMessage(chat.id).date }}</span>
+
+						<span class="user-list__card-time">
+              {{ renderLastMessage(chat.id).date }}
+            </span>
 					</div>
 				</article>
 			</li>
 		</TransitionGroup>
-		<div
-			v-if="!chatsNotEmpty && !chatsLoading"
+
+		<div 
+      v-else-if="isChatEmpty && !isChatsLoading"
 			class="search__card"
 		>
-			<h2 class="search__title">Тут пусто</h2>
-			<p class="search__descr">Вы ещё никому не писали</p>
+			<h2 class="search__title">
+        Тут пусто
+      </h2>
+
+			<p class="search__descr">
+        Вы ещё никому не писали
+      </p>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 	import { ref, computed } from 'vue';
-	import { useChatStore } from '@/stores/useChatStore';
-	import { useGlobalStore } from '@/stores/useGlobalStore';
+	import { useChatStore,useGlobalStore } from '@stores';
 	import { formatDate } from '@/composables/useDate';
 	import { ensure } from '@/helpers/ensureArgument';
 	import { MOBILE_DEVICE } from '@/utils/utils';
+  import { Emits, Props } from './types';
+  import FilterString from '../filter-string/FilterString.vue';
+  import { storeToRefs } from 'pinia';
 
-	// State
-	const chatsLoading = ref(true);
-	const search = ref('');
-	const topOfUserList = ref();
+  defineProps<Props>();
+	const emits = defineEmits<Emits>();
+
 	// Chat Store
 	const chatStore = useChatStore();
-	const chats = chatStore.getUserList;
+  const {
+    filterString,
+    chatList,
+    lastMessages,
+    chatStatus,
+    activeChat,
+  } = storeToRefs(chatStore);
+
 	// Global Store
 	const globalStore = useGlobalStore();
-	// Props
-	const props = defineProps({
-		chatsLoading: {
-			type: Boolean,
-			required: true,
-		},
-	});
-	// Emits
-	const emits = defineEmits(['openChat']);
 
-	const chatsNotEmpty = computed(() => {
-		return chatStore.chatList?.length;
-	});
+	// State
+	const topOfUserList = ref();
 
-	const filterByName = (): void => {
-		if (search.value.length < 1) {
-			chatStore.filter = '';
-		} else {
-			chatStore.filter = search.value;
-		}
-	};
+	const isChatEmpty = computed<boolean>(() => !!chatList.value?.length);
 
-	// Render Last Messages
-	const renderLastMessage = (id: number) => {
-		const chatId = ensure(chatStore.lastMessages?.find((message) => message.id == id));
+	// Render Last Message
+	const renderLastMessage = (id: string) => {
+		const chatId = ensure(lastMessages.value.find((message) => message.id == id));
 		const date = chatId.chat?.date;
 		let createDate: string = '';
 		if (date !== undefined) {
@@ -120,11 +118,15 @@
 	};
 
 	// Open chosen chat on click
-	const openChat = (id: number) => {
-		chatStore.chatStatus = true;
-		chatStore.activeChat = id;
-		emits('openChat', ensure(chats.value?.find((chat) => chat.id === id)));
-	};
+	const openChat = (id: string) => {
+    if (activeChat.value === id) {
+      activeChat.value = null;
+      return;
+    }
+		chatStatus.value = true;
+		activeChat.value = id;
+		emits('openChat', ensure(chatList.value?.find((chat) => chat.id === id)));
+	}; 
 
 	// Scroll to top of user list
 	const scrollToTop = () => {

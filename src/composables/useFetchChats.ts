@@ -1,8 +1,8 @@
 // Fetching users
 import { chats } from '@/data/index';
-import type { Chats } from '@/types/Chats';
+import type { User } from '@/types/shared';
 
-export async function useFetchChats(): Promise<Chats> {
+export async function useFetchChats(): Promise<User[]> {
 	// Some async get data here
 	return new Promise((res, rej) =>
 		setTimeout(() => {
@@ -10,3 +10,4 @@ export async function useFetchChats(): Promise<Chats> {
 		}, 1000)
 	);
 }
+  

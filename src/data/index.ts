@@ -1,6 +1,6 @@
-import type { Chats } from '@/types/Chats';
-
-export const chats: Chats = [
+import type { User } from '@/types/shared';
+ 
+export const chats: User[] = [
 	{
 		id: Date.now() - 10,
 		name: 'User1',

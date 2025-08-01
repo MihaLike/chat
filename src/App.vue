@@ -1,7 +1,8 @@
 <template>
-	<TheMain />
+	<AppContainer />
 </template>
 
 <script setup lang="ts">
-	import TheMain from '@/components/TheMain.vue';
+	import { AppContainer } from '@components';
 </script>
+   
