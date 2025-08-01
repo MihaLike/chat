@@ -1,9 +1,25 @@
 {
-	"extends": "@tsconfig/node18/tsconfig.json",
-	"include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "playwright.config.*"],
-	"compilerOptions": {
-		"composite": true,
-		"module": "ESNext",
-		"types": ["node"]
-	}
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "include": [
+    "src/**/*",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "**/__tests__/**/*",
+    "./config/**/*"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Bundler",
+    "types": ["node"],
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@types": ["./src/types"],
+      "@helpers": ["./src/helpers"],
+      "@stores": ["./src/stores"],
+      "@components": ["./src/components"],
+    }
+  }
 }
